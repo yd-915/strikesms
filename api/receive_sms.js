@@ -4,8 +4,8 @@ const router = require('express').Router()
 const axios = require('axios')
 const MessagingResponse = require('twilio').twiml.MessagingResponse
 const client = require('twilio')(
-   'ACcb1b9e5e59f2e932b1c02a9cecd7d2b8',
-   '0c63dc2f45813538c8c5fcb3dd563ee8s'
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
 )
 const {User} = require('../db/models')
 const {
