@@ -52,13 +52,13 @@ const createApp = () => {
   app.use('/api', require('./api'))
 
   // static file-serving middleware
-  app.use(express.static(path.join(__dirname + 'build')));
+  app.use(express.static(path.join(__dirname + '/build')));
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
 
   // sends index.html
   app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname + 'build/index.html'))
+    res.sendFile(path.join(__dirname + '/build/index.html'))
   })
 
   // error handling endware
