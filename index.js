@@ -52,13 +52,13 @@ const createApp = () => {
   app.use('/api', require('./api'))
 
   // static file-serving middleware
-  app.use(express.static(path.join(__dirname + '/public')));
+  app.use(express.static(path.join(__dirname + 'strikefront-production.up.railway.app/public')));
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
 
   // sends index.html
   app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/index.html'))
+    res.sendFile(path.join(__dirname + 'strikefront-production.up.railway.app/public/index.html'))
   })
 
   // error handling endware
