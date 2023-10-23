@@ -50,6 +50,9 @@ router.post('/signup', async (req, res, next) => {
       wallet: req.body.wallet
     }
 
+    // ... (existing code)
+
+
     console.log(userInfo)
     const user = await User.create(userInfo)
     client.validationRequests
@@ -66,12 +69,14 @@ router.post('/signup', async (req, res, next) => {
         )
       )
 
-    req.login(user, err => (err ? next(err) : res.json(user)))
+      req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
+    console.error(err); // Log the error for debugging
+
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('User already exists')
+      res.status(401).send('User already exists') // Enhance error message for uniqueness constraint error
     } else {
-      next(err)
+      res.status(500).send('Internal Server Error'); // Generic error message for other errors
     }
   }
 })
