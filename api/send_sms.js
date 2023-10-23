@@ -5,8 +5,8 @@ const client = require('twilio')(
 
 client.messages
   .create({
-    body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-    from: '+16475739491',
-    to: '+12568278087'
+    body: 'Is this the end of fiat?',
+    from: '+12568278087',
+    to: '+16475739491'
   })
   .then(message => console.log(message.sid))
