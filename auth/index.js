@@ -79,7 +79,7 @@ router.post('/signup', async (req, res, next) => {
 router.post('/logout', (req, res) => {
   req.logout('/')
   req.session.destroy()
-  res.redirect('/')
+  res.redirect('https://strikesmsserver-production.up.railway.app/')
 })
 
 router.get('/me', (req, res) => {
