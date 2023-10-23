@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
