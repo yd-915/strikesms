@@ -82,10 +82,15 @@ router.post('/signup', async (req, res, next) => {
 })
 
 router.post('/logout', (req, res) => {
-  req.logout('/')
-  req.session.destroy()
-  res.redirect('https://strikesmsserver-production.up.railway.app/')
-})
+  req.logout(() => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+      }
+      res.redirect('/');
+    });
+  });
+});
 
 router.get('/me', (req, res) => {
   res.json(req.user)
