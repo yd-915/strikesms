@@ -55,8 +55,12 @@ const findUserByPhone = async phone => {
 
 const findUserByUsername = async userName => {
   try {
+    if (!userName) {
+      throw new Error('Username is undefined')
+    }
+
     const findUser = await User.findOne({
-      where: {username: userName}
+      where: { username: userName }
     })
 
     if (!findUser) return null
@@ -72,6 +76,7 @@ const findUserByUsername = async userName => {
     throw new Error(error)
   }
 }
+
 
 const getBalance = async phone => {
   try {
