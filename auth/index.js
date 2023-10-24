@@ -8,7 +8,7 @@ const client = require('twilio')(
  process.env.TWILIO_AUTH_TOKEN
 )
 
-const twilioPhone = '+12568278087'
+const twilioPhone = '6474922775'
 
 const sendMessage = (phone, body) => {
   client.messages
