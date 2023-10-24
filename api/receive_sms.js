@@ -27,7 +27,7 @@ const {
 } = require('./crypto')
 const {Transactions} = require('../db/models')
 
-const twilioPhone = "6474922775"
+const twilioPhone = "+16474922775"
 
 module.exports = router
 
