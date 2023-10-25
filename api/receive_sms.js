@@ -53,20 +53,20 @@ const findUserByPhone = async phone => {
   }
 }
 
-const findUserByUsername = async userName => {
+const findUserByUsername = async username => {
   try {
-    if (!userName) {
+    if (!username) {
       throw new Error('Username is undefined')
     }
 
     const findUser = await User.findOne({
-      where: { username: userName }
+      where: { username: username }
     })
 
     if (!findUser) return null
     else {
       return {
-        userName: findUser.dataValues.username,
+        username: findUser.dataValues.username,
         number: findUser.dataValues.phone,
         userId: findUser.dataValues['id'],
         balance: findUser.dataValues.balance
