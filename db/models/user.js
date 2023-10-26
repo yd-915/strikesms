@@ -1,6 +1,28 @@
 const crypto = require('crypto')
-const Sequelize = require('sequelize')
+const {Sequelize} = require('sequelize')
+const sequelize = new Sequelize('railway', 'postgres', 'cCWUEtfMPrhQvoZtyrci', {
+  host: 'postgres',
+  dialect: 'postgres', // Or the appropriate database dialect
+  // Other database configuration options
+});
+
 const db = require('../db')
+
+class User extends Model {
+  // Define the properties of the user model
+}
+
+User.init(
+  {
+    // Define the properties of the user model
+  },
+  {
+    sequelize,
+    modelName: 'User',
+    tableName: 'Users',
+  }
+);
+
 
 const User = db.define('User', {
   username: {
