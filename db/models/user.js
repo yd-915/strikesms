@@ -8,21 +8,6 @@ const sequelize = new Sequelize('railway', 'postgres', 'cCWUEtfMPrhQvoZtyrci', {
 
 const db = require('../db')
 
-class User extends Model {
-  // Define the properties of the user model
-}
-
-User.init(
-  {
-    // Define the properties of the user model
-  },
-  {
-    sequelize,
-    modelName: 'User',
-    tableName: 'Users',
-  }
-);
-
 
 const User = db.define('User', {
   username: {
