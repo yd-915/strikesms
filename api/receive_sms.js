@@ -7,7 +7,7 @@ const client = require('twilio')(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 )
-const {User} = require('../db/models/user.js')
+const {User} = require('../db/models/user')
 const {
   checkRefill,
   genSeed,
@@ -53,29 +53,29 @@ const findUserByPhone = async phone => {
   }
 }
 
-const findUserByUsername = async username => {
+const findUserByUsername = async (userName) => {
   try {
-    if (!username) {
-      throw new Error('Username is undefined')
-    }
-
     const findUser = await User.findOne({
-      where: { username: username }
-    })
+      where: { username: userName }
+    });
 
-    if (!findUser) return null
-    else {
+    if (!findUser) {
+      throw new Error("User not found");
+    } else {
       return {
-        username: findUser.dataValues.username,
+        userName: findUser.dataValues.username,
         number: findUser.dataValues.phone,
-        userId: findUser.dataValues['id'],
+        userId: findUser.dataValues.id,
         balance: findUser.dataValues.balance
-      }
+      };
     }
   } catch (error) {
-    throw new Error(error)
+    // Handle the error here, such as logging it or throwing a custom error message
+    console.error(error);
+    throw new Error("Error occurred while finding user by username");
   }
-}
+};
+
 
 
 const getBalance = async phone => {
