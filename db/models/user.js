@@ -9,7 +9,7 @@ const sequelize = new Sequelize('railway', 'postgres', 'cCWUEtfMPrhQvoZtyrci', {
 const db = require('../db')
 
 
-const User = db.define('User', {
+const User = sequelize.define('User', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -61,6 +61,13 @@ const User = db.define('User', {
     type: Sequelize.STRING
   }
 })
+sequelize.sync()
+  .then(() => {
+    console.log('User model synchronized with the database');
+  })
+  .catch((error) => {
+    console.error('Error synchronizing User model:', error);
+  });
 
 module.exports = User
 
