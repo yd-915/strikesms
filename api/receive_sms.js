@@ -55,7 +55,7 @@ const findUserByPhone = async phone => {
 
 const findUserByUsername = async (userName) => {
   try {
-    const findUser = await User.findOne({
+    const findUser = await User({
       where: { username: userName }
     });
 
