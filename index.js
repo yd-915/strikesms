@@ -5,6 +5,7 @@ const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const { Sequelize, DataTypes } = require('sequelize');
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const app = express()
