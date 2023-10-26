@@ -19,7 +19,7 @@ passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findByPk(id) // Replace 'findById' with 'findByPk'
-    done(null, user)
+    done(null, User)
   } catch (err) {
     done(err)
   }
