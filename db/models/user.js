@@ -9,7 +9,7 @@ const sequelize = new Sequelize('railway', 'postgres', '11-DGEb24gd4g4f2BabgcCDC
 const db = require('../db')
 
 
-const User = sequelize.define('User', {
+const User = sequelize.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
