@@ -1,11 +1,5 @@
 const crypto = require('crypto')
 const {Sequelize} = require('sequelize')
-const sequelize = new Sequelize('railway', 'postgres', 'AdgGc1cG1c3fDEd5-bd-c1*fE1b-GeC*', {
-  host: 'postgres',
-  dialect: 'postgres', // Or the appropriate database dialect
-  // Other database configuration options
-});
-
 const db = require('../db')
 
 
