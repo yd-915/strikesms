@@ -17,14 +17,25 @@ module.exports = app
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 
+
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findByPk(id) // Replace 'findById' with 'findByPk'
-    done(null, user)
+    if (!id) {
+      return done(new Error("Invalid user ID"));
+    }
+
+    const user = await db.models.user.findByPk(id); // Replace 'findById' with 'findByPk'
+
+    if (!user) {
+      return done(null, false, { message: 'User not found' });
+    }
+
+    done(null, user);
   } catch (err) {
-    done(err)
+    done(err);
   }
-})
+});
+
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
