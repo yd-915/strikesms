@@ -54,29 +54,25 @@ const findUserByPhone = async phone => {
   }
 }
 
-const findUserByUsername = async (userName) => {
+const findUserByUsername = async userName => {
   try {
     const findUser = await User.findOne({
-      where: { username: userName }
-    });
+      where: {username: userName}
+    })
 
-    if (!findUser) {
-      throw new Error("User not found");
-    } else {
+    if (!findUser) return null
+    else {
       return {
         userName: findUser.dataValues.username,
         number: findUser.dataValues.phone,
-        userId: findUser.dataValues.id,
+        userId: findUser.dataValues['id'],
         balance: findUser.dataValues.balance
-      };
+      }
     }
   } catch (error) {
-    // Handle the error here, such as logging it or throwing a custom error message
-    console.error(error);
-    throw new Error("Error occurred while finding user by username");
+    throw new Error(error)
   }
-};
-
+}
 
 
 const getBalance = async phone => {
