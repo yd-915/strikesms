@@ -54,7 +54,7 @@ const findUserByPhone = async phone => {
   }
 }
 
-const findUserByUsername = async userName => {
+const findUserByUsername = async (userName) => {
   try {
     const findUser = await User.findOne({
       where: {username: userName}
@@ -73,6 +73,7 @@ const findUserByUsername = async userName => {
     throw new Error(error)
   }
 }
+
 
 
 const getBalance = async phone => {
