@@ -1,9 +1,8 @@
 const crypto = require('crypto')
-const {Sequelize} = require('sequelize')
+const Sequelize = require('sequelize')
 const db = require('../db')
 
-
-const User = sequelize.define('user', {
+const User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -55,13 +54,6 @@ const User = sequelize.define('user', {
     type: Sequelize.STRING
   }
 })
-sequelize.sync()
-  .then(() => {
-    console.log('User model synchronized with the database');
-  })
-  .catch((error) => {
-    console.error('Error synchronizing User model:', error);
-  });
 
 module.exports = User
 
