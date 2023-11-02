@@ -5,7 +5,7 @@ const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
 const db = new Sequelize(
   process.env.DATABASE_URL ||
-    `postgres://postgres:11-DGEb24gd4g4f2BabgcCDCF35B21-a@viaduct.proxy.rlwy.net:12955/railway`, 
+    `postgres://postgres:AdgGc1cG1c3fDEd5-bd-c1*fE1b-GeC*@roundhouse.proxy.rlwy.net:21921/railway`, 
   {
     logging: false
   }
