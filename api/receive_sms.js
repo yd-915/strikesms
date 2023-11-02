@@ -9,6 +9,7 @@ const client = require('twilio')(
 )
 
 const {User} = require('../db/models')
+const {username} = require('../db/models')
 const {
   checkRefill,
   genSeed,
