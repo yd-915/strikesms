@@ -8,7 +8,7 @@ const client = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 )
 
-const User = require('../db/models')
+const {User} = require('../db/models')
 const {
   checkRefill,
   genSeed,
