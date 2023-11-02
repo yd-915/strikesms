@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
+const bodyParser = require('body-parser');
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const { Sequelize, DataTypes } = require('sequelize');
 const db = require('./db')
@@ -33,6 +34,8 @@ const createApp = () => {
   app.use(express.json())
   app.use(express.urlencoded({extended: false}))
   app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: false }));
+
   // compression middleware
   app.use(compression())
 
