@@ -23,12 +23,22 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findByPk(id) // Replace 'findById' with 'findByPk'
-    done(null, user)
-  } catch (err) {
-    done(err)
+    if (!id) {
+      return done(new Error('Invalid user ID'));
+    }
+
+    const user = await db.models.user.findByPk(id);
+
+    if (!user) {
+      return done(null, false, { message: 'User not found' });
+    }
+
+    done(null, user);
+  } catch (error) {
+    console.error('Error retrieving user by ID: ', error);
+    done(error);
   }
-})
+});
 
 
 
@@ -46,15 +56,15 @@ const createApp = () => {
 
   // session middleware with passport
   app.use(
-    session({
-      secret: process.env.SESSION_SECRET || 'Farewell_Fiat',
-      store: sessionStore,
-      resave: false,
-      saveUninitialized: false
-    })
-  )
-  app.use(passport.initialize())
-  app.use(passport.session())
+  session({
+    secret: process.env.SESSION_SECRET || 'Farewell_Fiat',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, maxAge: 86400000 }, // Adjust the cookie options as needed
+  })
+);
+
  
   // auth and api routes
   app.use('/auth', require('./auth'))
