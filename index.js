@@ -51,7 +51,7 @@ const createApp = () => {
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 86400000 }, // Adjust the cookie options as needed
+    // Adjust the cookie options as needed
   })
 );
 
