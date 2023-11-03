@@ -9,6 +9,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const app = express()
+app.use(cors());
 const socketio = require('socket.io')
 module.exports = app
 
