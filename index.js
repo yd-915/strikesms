@@ -23,22 +23,12 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    if (!id) {
-      return done(new Error('Invalid user ID'));
-    }
-
-    const user = await db.models.user.findByPk(id);
-
-    if (!user) {
-      return done(null, false, { message: 'User not found' });
-    }
-
-    done(null, user);
-  } catch (error) {
-    console.error('Error retrieving user by ID: ', error);
-    done(error);
+    const user = await db.models.user.findById(id)
+    done(null, user)
+  } catch (err) {
+    done(err)
   }
-});
+})
 
 
 
