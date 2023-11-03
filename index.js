@@ -15,26 +15,22 @@ module.exports = app
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
 // passport registration
-passport.serializeUser((user, done) => done(null, user.id))
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
 
 passport.deserializeUser(async (id, done) => {
   try {
-    if (!id) {
-      return done(new Error("Invalid user ID"));
-    }
-
-    const user = await db.models.user.findByPk(id); // Replace 'findById' with 'findByPk'
-
-    if (!user) {
-      return done(null, false, { message: 'User not found' });
-    }
-
-    done(null, user);
+    const user = await db.models.user.findByPk(id) // Replace 'findById' with 'findByPk'
+    done(null, user)
   } catch (err) {
-    done(err);
+    done(err)
   }
-});
+})
+
+
 
 const createApp = () => {
   // logging middleware
