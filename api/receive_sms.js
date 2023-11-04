@@ -221,7 +221,6 @@ router.post('/', async (req, res, next) => {
      }
    }
  });
-  }
   try {
     const twiml = new MessagingResponse()
     twiml.message(req.query.message)
