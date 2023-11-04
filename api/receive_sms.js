@@ -58,6 +58,7 @@ const findUserByPhone = async phone => {
 const findUserByUsername = async (userName) => {
   try {
     const findUser = await User.findOne({
+      attributes: ["username"],
       where: {username: userName}
     })
 
