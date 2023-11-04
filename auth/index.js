@@ -43,11 +43,11 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     let userInfo = {
-      username: req.body.username.toLowerCase(),
-      email: req.body.email,
-      password: req.body.password,
-      phone: req.body.phone,
-      wallet: req.body.wallet
+      username: req.params.username.toLowerCase(),
+      email: req.params.email,
+      password: req.params.password,
+      phone: req.params.phone,
+      wallet: req.params.wallet
     }
 
     // ... (existing code)
@@ -57,8 +57,8 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.create(userInfo)
     client.validationRequests
       .create({
-        friendlyName: req.body.firstName,
-        phoneNumber: req.body.phone,
+        friendlyName: req.params.firstName,
+        phoneNumber: req.params.phone,
         callDelay: 7
       })
       .then(validationRequest =>
