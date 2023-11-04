@@ -142,9 +142,9 @@ router.post('/', async (req, res, next) => {
     toastMessage
 
   senderPhone = req.user ? req.user.phone : ''
-  if (req.body.messages) {
+  if (req.params.messages) {
     messageFromWeb = await findUserByUsername(
-      getBody(req.body.messages.toLowerCase())[2]
+      getBody(req.params.messages.toLowerCase())[2]
     )
     body = getBody(req.body.messages.toLowerCase())
     action = body[0].toLowerCase()
