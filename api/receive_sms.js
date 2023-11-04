@@ -220,7 +220,7 @@ router.post('/', async (req, res, next) => {
       senderPhone = req.query.From;
      }
    }
- });
+ })
   try {
     const twiml = new MessagingResponse()
     twiml.message(req.query.message)
