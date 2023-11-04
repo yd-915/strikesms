@@ -160,7 +160,7 @@ router.post('/', async (req, res, next) => {
       }
     }
   } else {
-    body = getBody(req.params.Body.toLowerCase())
+    body = getBody(req.body.Body.toLowerCase())
     action = body[0].toLowerCase()
     amount = body[1]
     receiverPhone = body[2]
