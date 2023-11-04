@@ -144,9 +144,9 @@ router.post('/', async (req, res, next) => {
   senderPhone = req.user ? req.user.phone : ''
   if (req.params.messages) {
     messageFromWeb = await findUserByUsername(
-      getBody(req.params.messages.toLowerCase())[2]
+      getBody(req.query.messages.toLowerCase())[2]
     )
-    body = getBody(req.body.messages.toLowerCase())
+    body = getBody(req.query.messages.toLowerCase())
     action = body[0].toLowerCase()
     amount = body[1]
     if (body.length !== 1) {
@@ -164,12 +164,12 @@ router.post('/', async (req, res, next) => {
     action = body[0].toLowerCase()
     amount = body[1]
     receiverPhone = body[2]
-    senderPhone = req.params.From
+    senderPhone = req.query.From
   }
 
   try {
     const twiml = new MessagingResponse()
-    twiml.message(req.body.message)
+    twiml.message(req.query.message)
 
     let ourReceiver = await findUserByUsername(receiverPhone)
 
