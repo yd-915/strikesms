@@ -55,22 +55,13 @@ const findUserByPhone = async phone => {
   }
 }
 
-const findUserByUsername = async (userName) => {
+const findUserByUsername = async userName => {
   try {
     const findUser = await User.findOne({
-      attributes: ["username"],
       where: {username: userName}
     })
 
-    if (!findUser) return null
-    else {
-      return {
-        userName: findUser.dataValues.username,
-        number: findUser.dataValues.phone,
-        userId: findUser.dataValues['id'],
-        balance: findUser.dataValues.balance
-      }
-    }
+   
   } catch (error) {
     throw new Error(error)
   }
