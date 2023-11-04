@@ -1,4 +1,4 @@
-/* eslint-disable */
+ /* eslint-disable */
 
 const router = require('express').Router()
 const axios = require('axios')
@@ -160,11 +160,11 @@ router.post('/', async (req, res, next) => {
       }
     }
   } else {
-    body = getBody(req.body.Body.toLowerCase())
+    body = getBody(req.params.Body.toLowerCase())
     action = body[0].toLowerCase()
     amount = body[1]
     receiverPhone = body[2]
-    senderPhone = req.body.From
+    senderPhone = req.params.From
   }
 
   try {
