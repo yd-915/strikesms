@@ -61,7 +61,7 @@ const findUserByUsername = async userName => {
       where: {username: userName}
     })
 
-    if (findUser) return null
+    if (!findUser) return null
     else {
       return {
         userName: findUser.dataValues.username,
