@@ -177,58 +177,58 @@ router.post('/', async (req, res, next) => {
 });
 
 
- router.post('/', async (req, res, next) => {
-  let body,
-    action,
-    amount,
-    receiverPhone,
-    senderPhone,
-    webUserName,
-    messageFromWeb,
-    toastMessage
+router.post('/', async (req, res, next) => {
+  try {
+    let body,
+      action,
+      amount,
+      receiverPhone,
+      senderPhone,
+      webUserName,
+      messageFromWeb,
+      toastMessage;
 
-  senderPhone = req.user ? req.user.phone : ''
-   if (req.query.messages) {
-    const messagesBody = getBody(req.query.messages);
-    if (messagesBody) {
-      const lowerCaseMessagesBody = messagesBody.toLowerCase();
-      messageFromWeb = await findUserByUsername(getBody(lowerCaseMessagesBody)[2]);
-      body = lowerCaseMessagesBody;
-      action = body[0];
-      amount = body[1];
+    senderPhone = req.user ? req.user.phone : '';
+    if (req.query.messages) {
+      const messagesBody = getBody(req.query.messages);
+      if (messagesBody) {
+        const lowerCaseMessagesBody = messagesBody.toLowerCase();
+        messageFromWeb = await findUserByUsername(getBody(lowerCaseMessagesBody)[2]);
+        body = lowerCaseMessagesBody;
+        action = body[0];
+        amount = body[1];
 
-   if (body.length !== 1) {
-        if (!messageFromWeb) {
-          toastMessage =
-            'The user you are trying to pay is not registered with us. Please try another user.';
-          res.send(toastMessage);
-          return;
-        } else {
-          receiverPhone = messageFromWeb.number;
-          webUserName = messageFromWeb.userName;
+        if (body.length !== 1) {
+          if (!messageFromWeb) {
+            toastMessage =
+              'The user you are trying to pay is not registered with us. Please try another user.';
+            res.send(toastMessage);
+            return;
+          } else {
+            receiverPhone = messageFromWeb.number;
+            webUserName = messageFromWeb.userName;
+          }
         }
       }
+    } else if (req.query.Body) {
+      const queryBody = getBody(req.query.Body);
+      if (queryBody) {
+        const lowerCaseQueryBody = queryBody.toLowerCase();
+        body = lowerCaseQueryBody;
+        action = body[0];
+        amount = body[1];
+        receiverPhone = body[2];
+        senderPhone = req.query.From;
+      }
     }
-  } else if (req.query.Body) {
-    const queryBody = getBody(req.query.Body);
-    if (queryBody) {
-      const lowerCaseQueryBody = queryBody.toLowerCase();
-      body = lowerCaseQueryBody;
-      action = body[0];
-      amount = body[1];
-      receiverPhone = body[2];
-      senderPhone = req.query.From;
-     }
-   }
- })
-  try {
-    const twiml = new MessagingResponse()
-    twiml.message(req.query.message)
 
-    let ourReceiver = await findUserByUsername(receiverPhone)
+    const twiml = new MessagingResponse();
+    twiml.message(req.query.message);
+
+    let ourReceiver = await findUserByUsername(receiverPhone);
 
     if (ourReceiver === null) {
-      ourReceiver = {username: false}
+      ourReceiver = { username: false };
     }
 
     const sender = (await findUserByPhone(senderPhone)) || 'undefined'
