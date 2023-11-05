@@ -9,4 +9,4 @@ client.messages
         to: '+16475739491'
     })
     .then(message => console.log(message.sid))
-    .done();
+
