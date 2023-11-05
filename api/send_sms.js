@@ -4,7 +4,6 @@ const client = require('twilio')(accountSid, authToken);
 
 client.messages
     .create({
-        body: 'Farewell fiat',
         from: '+16474922775',
         to: '+16475739491'
     })
