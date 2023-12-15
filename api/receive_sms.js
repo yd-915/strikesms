@@ -4,7 +4,7 @@ const router = require('express').Router()
 const axios = require('axios')
 const MessagingResponse = require('twilio').twiml.MessagingResponse
 const client = require('twilio')(
-  process.env.TWILIO_ACCOUNT_SID,
+  "ACcb1b9e5e59f2e932b1c02a9cecd7d2b8",
   process.env.TWILIO_AUTH_TOKEN
 )
 
@@ -368,3 +368,53 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+
+
+/* eslint-disable */
+
+const router = require('express').Router();
+const axios = require('axios');
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const client = require('twilio')(
+  process.env.twilioSid,
+  process.env.twilioAuthToken
+);
+const { User } = require('../db/models');
+const {
+  checkRefill,
+  genSeed,
+  initWallet,
+  unlockwallet,
+  getinfo,
+  newAddress,
+  balance,
+  getPeers,
+  connect,
+  disconnect,
+  openChannel,
+  listChannels,
+  addInvoice,
+  sendPayment,
+  startCron,
+} = require('./crypto');
+const { Transactions } = require('../db/models');
+
+const twilioPhone = process.env.twilionumber;
+
+module.exports = router;
+
+const sendMessage = (phone, body) => {
+  client.messages
+    .create({
+      body: body,
+      from: twilioPhone,
+      to: phone,
+    })
+    .then((message) => console.log('TWILIO MSG ID: ', message.sid))
+    .catch((error) => console.error('Error sending message:', error)); // Added error handling
+};
+
+// ... (other functions remain unchanged)
+
+
